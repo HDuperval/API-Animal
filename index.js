@@ -1,15 +1,30 @@
 import express from 'express';
+import { getAllanimals, createAnimal } from './src/animals.js';
 
 const app = express()
 app.use(express.json())
 
-app.get('/animal', async (req, res) => {
-    res.send('dogs')
+app.get('/animals', async (req, res) => {
+
+    try{
+        const result = await getAllanimals()
+         res.status(200).send(result)
+    } catch (error){
+        res.status(500).send(error)
+    }   
+        
+        //res.send('Dogs')
 })    
 
-app.post('/animal', async (req, res) => {
-    const race = req.body;
-    res.send(`${race.name} has  been added`);
+app.post('/animals', async (req, res) => {
+    const animal = req.body;
+
+    try{
+        const result = await createAnimal(animal)
+        res.status(201).send(result)
+    }catch(error){
+         res.status(500).send(error)
+}
 
 })
 
