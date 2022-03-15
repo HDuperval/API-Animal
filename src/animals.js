@@ -31,3 +31,27 @@ export const createAnimal = async (animal) => {
         console.error(error)
     }
 }
+export const updateAnimal = async (id, animal) => {
+    try {
+        const result = await animalCollection
+    .doc(id)
+    .update(animal)
+
+    return await getAllanimalsById(id)
+}   catch (error){
+    console.log(error)
+    }
+}
+
+export const getAllanimalsById = async id =>{
+    try{
+        const result = await animalCollection.doc(id).get()
+        return {
+            id: result.id,
+            ...result.data()
+        }
+
+        } catch (error){
+            console.error(error)
+        }
+    }
