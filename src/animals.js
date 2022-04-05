@@ -1,4 +1,4 @@
-import { query } from 'express'
+//import { query } from 'express'
 import connect from './connect.js'
 
 const animalCollection = connect().collection('animals')
